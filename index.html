@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camino Hacia El Bienestar - Consultorio Psicológico Terapéutico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyan-400': '#22d3ee',
+                        'pink-400': '#f472b6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .logo-brain {
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+        }
+
+        .logo-puzzle {
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+        }
+
+        .nav-gradient {
+            background: linear-gradient(to right, #67e8f9, #fbcfe8, #f9a8d4);
+        }
+
+        .content-gradient {
+            background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 100%);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-button {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-white">
+    <!-- Header -->
+    <header class="bg-cyan-400 text-white text-center py-3 px-4">
+        <p class="text-sm sm:text-base lg:text-lg font-medium">"Un paso a la vez hacia tu mejor versión"</p>
+    </header>
+
+    <!-- Main Header with Logo -->
+    <div class="bg-white px-4 sm:px-6 py-4 sm:py-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left">
+                    <!-- Logo -->
+                    <div class="flex items-center flex-shrink-0">
+                        <div class="relative">
+                            <!-- Tu logo -->
+                            <img src="public/logo.png" alt="Logo"
+                                class="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-lg" />
+                        </div>
+                    </div>
+                    <!-- Title -->
+                    <div>
+                        <a href="index.html">
+                            <h1
+                                class="text-2xl sm:text-3xl lg:text-4xl font-bold text-pink-400 mb-1 hover:text-pink-500 transition-colors cursor-pointer">
+                                Camino hacia el bienestar
+                            </h1>
+                        </a>
+                        <p class="text-black font-semibold text-xs sm:text-sm tracking-wider">
+                            CONSULTORIO PSICOLÓGICO TERAPÉUTICO
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex gap-3 flex-shrink-0">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-pink-400 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </div>
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-pink-400 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 
+                            7.75v8.5A5.75 5.75 0 0 1 16.25 
+                            22h-8.5A5.75 5.75 0 0 1 2 
+                            16.25v-8.5A5.75 5.75 0 0 1 7.75 
+                            2zm0 1.5A4.25 4.25 0 0 0 3.5 
+                            7.75v8.5A4.25 4.25 0 0 0 7.75 
+                            20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 
+                            4.25 0 0 0 16.25 3.5h-8.5zM12 
+                            7a5 5 0 1 1 0 10 5 5 0 0 
+                            1 0-10zm0 1.5a3.5 3.5 0 1 0 0 
+                            7 3.5 3.5 0 0 0 0-7zm5.25-.75a1 
+                            1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-gradient relative">
+        <div class="max-w-6xl mx-auto">
+            <!-- Desktop Navigation -->
+            <ul class="desktop-nav flex">
+                <li class="bg-cyan-300 px-6 lg:px-8 py-4">
+                    <a href="index.html" class="text-black font-medium">Inicio</a>
+                </li>
+                <li class="bg-pink-200 px-6 lg:px-8 py-4">
+                    <a href="blog.html" class="text-pink-600 font-medium hover:text-pink-800 transition-colors">Blog</a>
+                </li>
+                <li class="bg-pink-200 px-6 lg:px-8 py-4">
+                    <a href="nosotros.html"
+                        class="text-pink-600 font-medium hover:text-pink-800 transition-colors">Nosotros</a>
+                </li>
+                <li class="bg-pink-200 px-6 lg:px-8 py-4">
+                    <a href="servicios.html"
+                        class="text-pink-600 font-medium hover:text-pink-800 transition-colors">Servicios</a>
+                </li>
+                <li class="bg-pink-300 px-6 lg:px-8 py-4">
+                    <a href="contacto.html"
+                        class="text-pink-700 font-medium hover:text-pink-900 transition-colors">Contacto</a>
+                </li>
+            </ul>
+
+            <!-- Mobile Navigation Button -->
+            <div class="mobile-nav-button justify-between items-center px-4 py-4">
+                <span class="text-black font-medium">Menú</span>
+                <button id="mobile-menu-toggle" class="p-2 rounded-lg bg-white/20">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu absolute top-full left-0 right-0 bg-white shadow-lg z-50">
+                <ul class="flex flex-col">
+                    <li class="border-b border-gray-200">
+                        <a href="index.html"
+                            class="block px-6 py-4 text-cyan-600 font-medium hover:bg-cyan-50 transition-colors">Inicio</a>
+                    </li>
+                    <li class="border-b border-gray-200">
+                        <a href="blog.html"
+                            class="block px-6 py-4 text-pink-600 font-medium hover:bg-pink-50 transition-colors">Blog</a>
+                    </li>
+                    <li class="border-b border-gray-200">
+                        <a href="nosotros.html"
+                            class="block px-6 py-4 text-pink-600 font-medium hover:bg-pink-50 transition-colors">Nosotros</a>
+                    </li>
+                    <li class="border-b border-gray-200">
+                        <a href="servicios.html"
+                            class="block px-6 py-4 text-pink-600 font-medium hover:bg-pink-50 transition-colors">Servicios</a>
+                    </li>
+                    <li>
+                        <a href="contacto.html"
+                            class="block px-6 py-4 text-pink-700 font-medium hover:bg-pink-50 transition-colors">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-8">
+            <!-- Left side - Images -->
+            <div class="w-full lg:flex-1 order-2 lg:order-1">
+                <div class="flex items-center justify-center gap-2 sm:gap-4">
+                    <!-- Navigation arrow left -->
+                    <button id="prev-btn"
+                        class="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-300 hover:bg-cyan-400 rounded-full flex items-center justify-center transition-colors duration-200 flex-shrink-0">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- Images container -->
+                    <div class="relative flex-1 max-w-md lg:max-w-none">
+                        <!-- Decorative circles -->
+                        <div
+                            class="absolute -top-4 -left-4 sm:-top-8 sm:-left-8 w-16 h-16 sm:w-24 sm:h-24 bg-cyan-200 rounded-full opacity-50">
+                        </div>
+                        <div
+                            class="absolute -bottom-4 -right-4 sm:-bottom-8 sm:-right-8 w-20 h-20 sm:w-32 sm:h-32 bg-pink-200 rounded-full opacity-50">
+                        </div>
+
+                        <!-- Images -->
+                        <div class="flex gap-2 sm:gap-4">
+                            <!-- Current image -->
+                            <div class="w-full sm:w-48 h-48 sm:h-64 bg-gray-200 rounded-lg overflow-hidden">
+                                <img id="current-image" src="/placeholder.svg?height=256&width=192" alt="Imagen actual"
+                                    class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Next image preview - hidden on mobile -->
+                            <div class="hidden sm:block w-48 h-64 bg-gray-200 rounded-lg overflow-hidden">
+                                <img id="next-image" src="/placeholder.svg?height=256&width=192" alt="Siguiente imagen"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation arrow right -->
+                    <button id="next-btn"
+                        class="w-10 h-10 sm:w-12 sm:h-12 bg-cyan-300 hover:bg-cyan-400 rounded-full flex items-center justify-center transition-colors duration-200 flex-shrink-0">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Carousel indicators -->
+                <div id="carousel-indicators" class="flex justify-center gap-2 mt-4 sm:mt-6">
+                    <!-- Indicators will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Right side - Content -->
+            <div class="w-full lg:flex-1 order-1 lg:order-2">
+                <div class="content-gradient rounded-2xl sm:rounded-3xl p-6 sm:p-8 relative">
+                    <!-- Decorative circles -->
+                    <div
+                        class="absolute top-2 right-2 sm:top-4 sm:right-4 w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full opacity-30">
+                    </div>
+                    <div
+                        class="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 w-8 h-8 sm:w-12 sm:h-12 bg-pink-200 rounded-full opacity-40">
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-bold text-pink-400 mb-4 sm:mb-6">
+                        Recupera tu<br>bienestar emocional
+                    </h2>
+
+                    <div class="w-16 sm:w-24 h-1 bg-cyan-400 mb-4 sm:mb-6"></div>
+
+                    <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+                        Tienes ansiedad, depresión o problemas de pareja. No estás solo, estamos aquí para ayudarte de
+                        nuevo.
+                    </p>
+
+                    <a href="servicios.html">
+                        <button
+                            class="bg-pink-400 hover:bg-pink-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-medium w-full sm:w-auto transition-colors">
+                            Ver más
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="border-2 sm:border-4 border-blue-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
+            <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+                <!-- Left side - Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-cyan-400 mb-3 sm:mb-4">Un poco sobre nosotros</h3>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-pink-400 mb-2">Camino hacia el bienestar</h2>
+                    <div class="w-24 sm:w-32 h-1 bg-cyan-400 mb-4 sm:mb-6 mx-auto lg:mx-0"></div>
+                    <p class="text-black font-semibold text-xs sm:text-sm tracking-wider mb-6 sm:mb-8">
+                        CONSULTORIO PSICOLÓGICO TERAPÉUTICO
+                    </p>
+
+                    <div class="space-y-4 sm:space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed">
+                        <p>
+                            Es un espacio dedicado a promover la salud emocional y mental, ofreciendo acompañamiento
+                            profesional
+                            para el manejo del estrés, la ansiedad, la depresión y otros retos psicológicos.
+                        </p>
+                        <p>
+                            A través de publicaciones, talleres y asesorías, brindan consejos prácticos, tips de
+                            autocuidado y
+                            orientación para reconocer síntomas que necesitan atención, con el objetivo de guiar a cada
+                            persona
+                            hacia una vida más equilibrada y plena.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right side - Logo -->
+                <div class="flex-shrink-0 mx-auto lg:mx-0">
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <!-- Tu logo -->
+                            <img src="public/logo.png" alt="Logo"
+                                class="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-lg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="bg-pink-200 py-12 sm:py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <!-- Header -->
+            <div class="text-center mb-8 sm:mb-12">
+                <div class="inline-block bg-cyan-400 text-white px-8 sm:px-12 py-3 sm:py-4 rounded-full mb-4">
+                    <h2 class="text-lg sm:text-2xl font-bold">Algunas de nuestras publicaciones</h2>
+                </div>
+                <div class="inline-block bg-pink-400 text-white px-6 sm:px-8 py-2 rounded-full">
+                    <p class="text-sm sm:text-lg font-medium">
+                        Te invitamos a un espacio para ayudar tu mente y tu bienestar
+                    </p>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-center text-gray-700 text-base sm:text-lg mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+                Encontrarás publicaciones con consejos, tips y síntomas que puedes reconocer y aprender a manejar para
+                sentirte mejor cada día
+            </p>
+
+            <!-- Publication Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+
+                <!-- Post 1 -->
+                <div
+                    class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+                    <!-- Imagen del post -->
+                    <div class="rounded-2xl overflow-hidden mb-4">
+                        <img src="https://scontent.flim38-1.fna.fbcdn.net/v/t39.30808-6/533067312_122199107690306946_2582968086776622425_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=4993s_CSmG4Q7kNvwGNaL0d&_nc_oc=Adn4mct8KzCYwBlBYWHIBG0yS5NS91xvnjt40FLlUsd0v5qSkafYfy_TydkdaJ0ETR0&_nc_zt=23&_nc_ht=scontent.flim38-1.fna&_nc_gid=EcLF7YJB33WCofQe8Yxszw&oh=00_AfVYH9Rqn9SgYaRDH1RV9QXXj12cjClwdchjjM6epGo6ng&oe=68A7E097" alt="Post de Facebook"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <!-- Contenido -->
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">
+                        Hábitos para reducir el estrés
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed flex-1">
+                        Descubre técnicas efectivas para manejar el estrés diario y mejorar tu bienestar mental.
+                    </p>
+                    <div class="mt-4 text-center">
+                        <a href="https://www.facebook.com/photo/?fbid=122199107684306946&set=a.122101473938306946" target="_blank">
+                            <button
+                                class="bg-cyan-400 hover:bg-cyan-500 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
+                                Ver más
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div
+                    class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+                    <div class="rounded-2xl overflow-hidden mb-4">
+                        <img src="https://scontent.flim38-1.fna.fbcdn.net/v/t39.30808-6/471917709_122161865888306946_4718555121567685719_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=xFd8XvCZy4IQ7kNvwFPI6D1&_nc_oc=AdmVYNfrfpzKOvTXCiu_ZkPyXenvu4smZP68WtB1kV8EUBx0bWJXHM7pIPcH9-urstQ&_nc_zt=23&_nc_ht=scontent.flim38-1.fna&_nc_gid=Tj3patCmq0V0Quo9SF2y6A&oh=00_AfXPE5gkySVcovIZ8czHF-egxKr2U1x6GsXKDj5wi4YOvA&oe=68A7DCD9" alt="Post de Facebook"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">
+                        3 señales de que tu cuerpo necesita un descanso
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed flex-1">
+                        Aprende a reconocer cuándo tu cuerpo te pide parar antes de llegar al límite.
+                    </p>
+                    <div class="mt-4 text-center">
+                        <a href="https://www.facebook.com/photo?fbid=122127307952306946&set=a.122101473938306946" target="_blank">
+                            <button
+                                class="bg-cyan-400 hover:bg-cyan-500 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
+                                Ver más
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div
+                    class="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+                    <div class="rounded-2xl overflow-hidden mb-4">
+                        <img src="https://scontent.flim38-1.fna.fbcdn.net/v/t39.30808-6/471917750_122161861922306946_5414388990636044896_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=dy71hwV7L3MQ7kNvwFeRa4I&_nc_oc=Adl1XkexhFVhUG8Q_AeeuR0QXo9J5XKKMpD2pQL1i3zAfYjkfztY8-Qxza_lEizz_0c&_nc_zt=23&_nc_ht=scontent.flim38-1.fna&_nc_gid=ektYb90BsVjInT7kD6NXLQ&oh=00_AfV3_3XapTx7y5QvUa81XZQ3hoQl_4BSLAFjLHxhqXvmJA&oe=68A7EAAD" alt="Post de Facebook"
+                            class="w-full h-48 object-cover">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">
+                        Camino hacia el bienestar
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed flex-1">
+                        Conoce más sobre nuestro enfoque terapéutico y cómo podemos ayudarte en tu proceso de sanación.
+                    </p>
+                    <div class="mt-4 text-center">
+                        <a href="https://www.facebook.com/photo?fbid=122127103736306946&set=a.122101473938306946" target="_blank">
+                            <button
+                                class="bg-cyan-400 hover:bg-cyan-500 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
+                                Ver más
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Carousel functionality
+        const carouselImages = [
+            {
+                src: "public/therapist-taking-notes.png",
+                alt: "Terapeuta tomando notas durante sesión"
+            },
+            {
+                src: "public/therapy-session.png",
+                alt: "Sesión de terapia individual"
+            },
+            {
+                src: "public/group-therapy.png",
+                alt: "Sesión de terapia grupal"
+            },
+            {
+                src: "public/family-therapy-consultation.png",
+                alt: "Consulta de terapia familiar"
+            }
+        ];
+        let currentImageIndex = 0;
+
+        function updateCarousel() {
+            const currentImg = document.getElementById('current-image');
+            const nextImg = document.getElementById('next-image');
+            const indicators = document.getElementById('carousel-indicators');
+
+            // Update images
+            currentImg.src = carouselImages[currentImageIndex].src;
+            currentImg.alt = carouselImages[currentImageIndex].alt;
+
+            if (nextImg) {
+                const nextIndex = (currentImageIndex + 1) % carouselImages.length;
+                nextImg.src = carouselImages[nextIndex].src;
+                nextImg.alt = carouselImages[nextIndex].alt;
+            }
+
+            // Update indicators
+            indicators.innerHTML = '';
+            carouselImages.forEach((_, index) => {
+                const indicator = document.createElement('button');
+                indicator.className = `w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors duration-200 ${index === currentImageIndex ? 'bg-cyan-400' : 'bg-gray-300'
+                    }`;
+                indicator.onclick = () => {
+                    currentImageIndex = index;
+                    updateCarousel();
+                };
+                indicators.appendChild(indicator);
+            });
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
+            updateCarousel();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + carouselImages.length) % carouselImages.length;
+            updateCarousel();
+        }
+
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize carousel
+            updateCarousel();
+
+            // Carousel controls
+            document.getElementById('next-btn').addEventListener('click', nextImage);
+            document.getElementById('prev-btn').addEventListener('click', prevImage);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
+
+            // Close mobile menu when clicking on links
+            const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    const menuIcon = document.getElementById('menu-icon');
+                    const closeIcon = document.getElementById('close-icon');
+
+                    mobileMenu.classList.remove('active');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+
+            // Auto-advance carousel every 5 seconds
+            setInterval(nextImage, 5000);
+        });
+    </script>
+</body>
+
+</html>
