@@ -7,6 +7,7 @@
     <title>Camino Hacia El Bienestar - Consultorio Psicológico Terapéutico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="public/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -20,6 +21,102 @@
         }
     </script>
     <style>
+        #chatbot-btn {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #f472b6;
+          color: white;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          border: none;
+          font-size: 26px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          z-index: 1000;
+        }
+    
+        #chatbot-window {
+          display: none;
+          position: fixed;
+          bottom: 90px;
+          right: 20px;
+          width: 360px;
+          height: 500px;
+          background: #fff url('images/chat-bg.png') no-repeat center center;
+          background-size: cover;
+          border: 2px solid #f472b6;
+          border-radius: 18px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+          display: flex;
+          flex-direction: column;
+          z-index: 1000;
+        }
+    
+        #chatbot-header {
+          background-color: #f472b6;
+          color: white;
+          padding: 12px;
+          text-align: center;
+          font-weight: bold;
+          border-top-left-radius: 16px;
+          border-top-right-radius: 16px;
+        }
+    
+        #chatbot-messages {
+          flex: 1;
+          padding: 10px;
+          overflow-y: auto;
+          font-size: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+    
+        .message {
+          max-width: 80%;
+          padding: 10px 14px;
+          border-radius: 18px;
+          line-height: 1.4;
+          word-wrap: break-word;
+        }
+    
+        .user-message {
+          background-color: #dcf8c6;
+          align-self: flex-end;
+          border-bottom-right-radius: 2px;
+        }
+    
+        .bot-message {
+          background-color: white;
+          align-self: flex-start;
+          border-bottom-left-radius: 2px;
+        }
+    
+        #chatbot-input {
+          display: flex;
+          border-top: 1px solid #ddd;
+        }
+    
+        #chatbot-input input {
+          flex: 1;
+          padding: 10px;
+          border: none;
+          border-bottom-left-radius: 16px;
+        }
+    
+        #chatbot-input button {
+          background-color: #f472b6;
+          color: white;
+          border: none;
+          padding: 10px 14px;
+          border-bottom-right-radius: 16px;
+          cursor: pointer;
+        }
+    
+        #mic-btn.listening {
+          background-color: #22d3ee !important;
+        }
         .logo-brain {
             background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
         }
@@ -427,7 +524,142 @@
             </div>
         </div>
     </section>
+      <button id="chatbot-btn" title="Chatea con nosotros">
+        <i class="fas fa-comment-dots"></i>
+      </button>
+      <div id="chatbot-window">
+        <div id="chatbot-header">CaminoBot</div>
+        <div id="chatbot-messages">
+          <div class="bot-message message">¡Hola! ¿En qué puedo ayudarte hoy?</div>
+        </div>
+        <div id="chatbot-input">
+          <input type="text" id="user-input" placeholder="Escribe tu mensaje..." />
+          <button id="mic-btn" title="Hablar">
+            <i class="fa fa-microphone"></i>
+          </button>
+          <button onclick="enviarMensaje()" title="Enviar">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+  <script>
+    const user_id = crypto.randomUUID();
+    const input = document.getElementById("user-input");
+    const micBtn = document.getElementById("mic-btn");
+    let recognizing = false;
+    let recognition;
 
+    // Mostrar / ocultar chatbot
+    document.getElementById("chatbot-btn").onclick = () => {
+      const win = document.getElementById("chatbot-window");
+      win.style.display = win.style.display === "none" || win.style.display === "" ? "flex" : "none";
+    };
+
+    // Enviar mensaje con Enter
+    input.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        enviarMensaje();
+      }
+    });
+
+    async function enviarMensaje() {
+      const mensaje = input.value.trim();
+      if (!mensaje || input.disabled) return;
+
+      const contenedor = document.getElementById("chatbot-messages");
+
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user-message";
+      userMsg.textContent = mensaje;
+      contenedor.appendChild(userMsg);
+      contenedor.scrollTop = contenedor.scrollHeight;
+
+      input.value = "";
+      input.disabled = true;
+
+      const typingMsg = document.createElement("div");
+      typingMsg.className = "message bot-message";
+      typingMsg.innerHTML = `<span class="dot-typing">...</span>`;
+      contenedor.appendChild(typingMsg);
+      contenedor.scrollTop = contenedor.scrollHeight;
+
+      try {
+        const res = await fetch("https://chatbot-ug3i.onrender.com/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id, mensaje })
+        });
+
+        const data = await res.json();
+        contenedor.removeChild(typingMsg);
+
+        const botMsg = document.createElement("div");
+        botMsg.className = "message bot-message";
+        botMsg.textContent = data.respuesta || "Lo siento, no pude procesar tu mensaje.";
+        contenedor.appendChild(botMsg);
+        contenedor.scrollTop = contenedor.scrollHeight;
+      } catch (error) {
+        contenedor.removeChild(typingMsg);
+        const errMsg = document.createElement("div");
+        errMsg.className = "message bot-message";
+        errMsg.textContent = "Error de conexión con el servidor.";
+        contenedor.appendChild(errMsg);
+      }
+
+      input.disabled = false;
+      input.focus();
+    }
+
+    // Reconocimiento de voz
+    if ('webkitSpeechRecognition' in window) {
+      recognition = new webkitSpeechRecognition();
+      recognition.lang = 'es-PE';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      micBtn.addEventListener("click", () => {
+        try {
+          if (!recognizing) {
+            recognition.start();
+          } else {
+            recognition.stop();
+          }
+        } catch (err) {
+          console.error("Error al iniciar reconocimiento:", err);
+          micBtn.classList.remove("listening");
+          recognizing = false;
+        }
+      });
+
+      recognition.onstart = () => {
+        recognizing = true;
+        micBtn.classList.add("listening");
+        input.placeholder = "🎙️ Escuchando...";
+      };
+
+      recognition.onresult = function (event) {
+        const texto = event.results[0][0].transcript.trim();
+        if (texto) {
+          input.value = texto;
+          enviarMensaje();
+        }
+      };
+
+      recognition.onerror = function (event) {
+        console.warn("❌ Error en reconocimiento:", event.error);
+      };
+
+      recognition.onend = () => {
+        recognizing = false;
+        micBtn.classList.remove("listening");
+        input.placeholder = "Escribe tu mensaje...";
+      };
+    } else {
+      micBtn.style.display = "none";
+      console.warn("⚠️ Este navegador no soporta reconocimiento de voz.");
+    }
+  </script>
     <script>
         // Carousel functionality
         const carouselImages = [
