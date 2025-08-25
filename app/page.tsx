@@ -99,7 +99,7 @@ export default function HomePage() {
     {
       title: "TÉCNICA 4-7-8",
       image: "/image3.jpg",
-      description: "Técnica de respiración para la relajación y el sueño",
+      description: "Thécnica de respiración para la relajación y el sueño",
     },
   ]
 
