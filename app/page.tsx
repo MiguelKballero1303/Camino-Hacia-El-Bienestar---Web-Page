@@ -1,5 +1,5 @@
 "use client"
-
+type SVGProps = React.SVGProps<SVGSVGElement>
 import type React from "react"
 
 import {
@@ -25,11 +25,23 @@ import { useState, useEffect, useRef, useMemo } from "react"
 import Link from "next/link"
 import { v4 as uuidv4 } from "uuid"
 
-const TikTokIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-  </svg>
-)
+const TikTokIcon = (props: SVGProps) => {
+  const { className, ...rest } = props
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...rest} // <--- aquí se forwardean style, onClick, aria, etc.
+    >
+      {/* usa fill="currentColor" en el path para que herede `color` */}
+      <path
+        fill="currentColor"
+        d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.20 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
+      />
+    </svg>
+  )
+}
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -253,7 +265,7 @@ export default function HomePage() {
               className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
               style={{ backgroundColor: "#FFAB65" }}
             >
-              <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+              <TikTokIcon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
             </div>
           </div>
         </div>
@@ -359,22 +371,24 @@ export default function HomePage() {
 
           {/* Login Button - Responsive */}
           <Button
-            className="text-gray-700 rounded-full px-3 sm:px-6 py-2 flex items-center gap-1 sm:gap-2 font-sans transition-all duration-300 hover:scale-105 transform text-sm sm:text-base"
+            className="text-gray-700 rounded-full px-3 sm:px-6 py-2 flex items-center gap-1 sm:gap-2 font-sans transition-all duration-300 hover:scale-105 transform text-sm sm:text-base focus:outline-none focus:ring-0"
             style={{
               backgroundColor: "#D4FFF0",
               transition: "all 0.3s ease",
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = "#FFAB65"
-              e.target.style.color = "white"
-              e.target.style.transform = "translateY(-2px) scale(1.05)"
-              e.target.style.boxShadow = "0 6px 20px rgba(255, 171, 101, 0.3)"
+              const target = e.currentTarget as HTMLElement
+              target.style.backgroundColor = "#FFAB65"
+              target.style.color = "white"
+              target.style.transform = "translateY(-2px) scale(1.05)"
+              target.style.boxShadow = "0 6px 20px rgba(255, 171, 101, 0.3)"
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "#D4FFF0"
-              e.target.style.color = "#374151"
-              e.target.style.transform = "translateY(0) scale(1)"
-              e.target.style.boxShadow = "none"
+              const target = e.currentTarget as HTMLElement
+              target.style.backgroundColor = "#D4FFF0"
+              target.style.color = "#374151"
+              target.style.transform = "translateY(0) scale(1)"
+              target.style.boxShadow = "none"
             }}
             onClick={() => (window.location.href = "https://sistema-salud-frontend.onrender.com/")}
           >
@@ -442,14 +456,13 @@ export default function HomePage() {
           />
 
           {/* Navigation dots */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3">
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
             {carouselData.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? "scale-125" : "hover:scale-110"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentSlide ? "scale-125" : "hover:scale-110"
+                  }`}
                 style={{
                   backgroundColor: index === currentSlide ? "white" : "rgba(255,255,255,0.5)",
                   boxShadow: index === currentSlide ? "0 0 10px rgba(255,255,255,0.5)" : "none",
@@ -547,9 +560,8 @@ export default function HomePage() {
               <button
                 key={index}
                 onClick={() => setCurrentContentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentContentSlide ? "scale-125" : "hover:scale-110"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentContentSlide ? "scale-125" : "hover:scale-110"
+                  }`}
                 style={{
                   backgroundColor: index === currentContentSlide ? "#8FBAC8" : "rgba(143,186,200,0.3)",
                 }}
@@ -583,24 +595,10 @@ export default function HomePage() {
 
                 <div className="space-y-4 text-gray-700 font-sans leading-relaxed text-justify">
                   <p>
-                    Es un espacio dedicado a promover la salud emocional y mental, ofreciendo acompañamiento profesional
-                    para el manejo del estrés, la ansiedad, la depresión y otros retos psicológicos. Nuestro enfoque
-                    integral combina técnicas terapéuticas modernas con un ambiente cálido y acogedor.
+                    Somos un espacio dedicado a promover la salud emocional y mental, ofreciendo acompañamiento profesional para el manejo del estrés, la ansiedad, la depresión y otros retos psicológicos. Nuestro enfoque integral combina técnicas terapéuticas modernas —como la terapia cognitivo-conductual, humanística y sistémica— con un ambiente cálido y acogedor, adaptando cada proceso a las necesidades específicas de cada persona, su ritmo y sus circunstancias.
                   </p>
                   <p>
-                    Trabajamos con terapia individual, de pareja y familiar, utilizando metodologías como la terapia
-                    cognitivo-conductual, humanística y sistémica. Cada proceso terapéutico se adapta a las necesidades
-                    específicas de nuestros pacientes, respetando su ritmo y circunstancias particulares.
-                  </p>
-                  <p>
-                    A través de publicaciones, talleres y asesorías, brindamos consejos prácticos, tips de autocuidado y
-                    orientación para reconocer síntomas que necesitan atención. Nuestro objetivo es empoderar a cada
-                    persona con herramientas efectivas para el manejo emocional y el crecimiento personal.
-                  </p>
-                  <p>
-                    Creemos firmemente que la salud mental es fundamental para una vida plena. Por eso, nos
-                    comprometemos a guiar a cada persona hacia una vida más equilibrada, resiliente y satisfactoria,
-                    construyendo juntos un camino hacia el bienestar integral.
+                    Además de la atención individual, de pareja y familiar, compartimos publicaciones, talleres y asesorías que brindan consejos prácticos, estrategias de autocuidado y orientación para reconocer señales que requieren apoyo. Creemos que la salud mental es clave para una vida plena, por lo que nos comprometemos a guiar a cada persona hacia un camino de equilibrio, resiliencia y bienestar integral.
                   </p>
                 </div>
               </div>
@@ -625,9 +623,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Symptom Card 1 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <div className="relative">
@@ -648,9 +646,9 @@ export default function HomePage() {
 
             {/* Symptom Card 2 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <Heart className="w-12 h-12 fill-current" style={{ color: "#8FBAC8" }} />
@@ -667,9 +665,9 @@ export default function HomePage() {
 
             {/* Symptom Card 3 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <div className="relative">
@@ -708,9 +706,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Benefit Card 1 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <User className="w-12 h-12" style={{ color: "#8FBAC8" }} />
@@ -727,9 +725,9 @@ export default function HomePage() {
 
             {/* Benefit Card 2 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <CheckCircle className="w-12 h-12" style={{ color: "#8FBAC8" }} />
@@ -744,9 +742,9 @@ export default function HomePage() {
 
             {/* Benefit Card 3 */}
             <div className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="p-8 flex flex-col items-center text-center">
+              <div className="p-8 pt-8 pb-2 flex flex-col items-center text-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-3"
                   style={{ backgroundColor: "#B8E0D2" }}
                 >
                   <Star className="w-12 h-12" style={{ color: "#8FBAC8" }} />
@@ -932,9 +930,8 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => setCurrentPublicationSlide(index)}
-                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                    index === currentPublicationSlide ? "scale-125" : "hover:scale-110"
-                  }`}
+                  className={`w-4 h-4 rounded-full transition-all duration-300 ${index === currentPublicationSlide ? "scale-125" : "hover:scale-110"
+                    }`}
                   style={{
                     backgroundColor: index === currentPublicationSlide ? "#8FBAC8" : "rgba(143,186,200,0.3)",
                   }}
@@ -1007,9 +1004,17 @@ export default function HomePage() {
                   <h3 className="text-2xl font-bold text-gray-800 font-serif mb-4">
                     Terapia Individual para tu Bienestar Emocional
                   </h3>
-                  <p className="text-gray-600 font-sans mb-6">
-                    Descubre un espacio seguro y profesional donde podrás trabajar en tu crecimiento personal y mejorar
-                    tu calidad de vida.
+                  <p className="text-gray-600 font-sans mb-6 leading-relaxed">
+                    Descubre un espacio seguro y profesional donde podrás trabajar en tu crecimiento personal y mejorar tu calidad de vida. 
+                    La terapia individual está pensada para acompañarte en el manejo de la ansiedad, el estrés, la depresión y otros retos 
+                    emocionales que pueden afectar tu día a día. En cada sesión tendrás la oportunidad de explorar tus pensamientos y 
+                    emociones en un ambiente de confianza, guiado por un profesional que te brindará orientación y herramientas prácticas.
+                    <br /><br />
+                    Nuestro objetivo es ayudarte a comprender mejor lo que estás viviendo, fortalecer tu autoestima y construir nuevas 
+                    formas de afrontar las dificultades. A través de un enfoque empático y adaptado a tus necesidades, podrás identificar 
+                    patrones que limitan tu bienestar y aprender estrategias que promuevan cambios positivos. La terapia no solo busca 
+                    aliviar síntomas, sino también impulsar tu desarrollo personal, para que logres una vida más equilibrada, plena y 
+                    resiliente.
                   </p>
                   <Button
                     onClick={() => (window.location.href = "/servicios")}
@@ -1281,9 +1286,8 @@ export default function HomePage() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`p-3 rounded-lg max-w-[80%] ${
-                  msg.type === "user" ? "bg-blue-100 text-gray-800 ml-auto" : "bg-gray-200 text-gray-800 mr-auto"
-                }`}
+                className={`p-3 rounded-lg max-w-[80%] ${msg.type === "user" ? "bg-blue-100 text-gray-800 ml-auto" : "bg-gray-200 text-gray-800 mr-auto"
+                  }`}
               >
                 {msg.text}
               </div>
