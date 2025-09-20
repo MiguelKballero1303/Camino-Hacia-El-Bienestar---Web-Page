@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button"
 import { useState, useEffect, useRef, useMemo } from "react"
 import Link from "next/link"
 import { v4 as uuidv4 } from "uuid"
+import ChatbotIntro from "@/components/ChatbotIntro"
 
 const TikTokIcon = (props: SVGProps) => {
   const { className, ...rest } = props
@@ -446,7 +447,7 @@ export default function HomePage() {
           </div>
         )}
       </nav>
-
+      <ChatbotIntro />
       <div className="relative h-96 overflow-hidden">
         <div className="relative w-full h-full">
           <img
@@ -1264,15 +1265,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-
-      <button
-        onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-        className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:scale-110"
-        style={{ backgroundColor: "#FFAB65" }}
-        title="Chatea con nosotros"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </button>
 
       {isChatbotOpen && (
         <div
